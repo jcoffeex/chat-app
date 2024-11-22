@@ -7,18 +7,19 @@ const Container = styled.View`
     background-color: ${colors["black-00"]};
 `;
 
-const Content = styled.View<SCMessageProps>`
+const Content = styled.View`
     padding: 14px;
     
     position: relative;
 
     flex: 1;
+
     justify-content: center;
-    align-items: ${props => props.messageOrientation === 'sender' ? 'flex-start' : 'flex-end'};
 `
 
-const MessagesContainer = styled.View`
-    margin-top: 100%;
+const MessagesContainer = styled.View<SCMessageProps>`
+    align-items: ${props => props.messageOrientation === 'sender' ? 'flex-end' : 'flex-start'}; 
+
 `
 
 const inputContainer = styled.View`

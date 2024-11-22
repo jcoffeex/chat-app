@@ -1,16 +1,21 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit';
 
+interface Message {
+    user: string;
+    message: string;
+}
+
 interface userState {
     username: string;
     typedMessage: string;
-    messageReceived: string;
+    messages: Message[];
     isLoggedIn: boolean;
 }
 
 const initialState: userState = {
     username: '',
-    typedMessage: '',
-    messageReceived: '',
+    typedMessage: '', 
+    messages: [],
     isLoggedIn: false,
 };
 
@@ -34,12 +39,11 @@ export const userSlice = createSlice({
             state.typedMessage = action.payload;
         },
 
-        setMessageReceived: (state, action:  PayloadAction<string>) => {
-            state.messageReceived = action.payload;
+        setMessages: (state, action:  PayloadAction<Message[]>) => {
+            state.messages = [...state.messages, ...action.payload];
         }
-        
     }, 
 });
 
-export const { setUserName, clearUserName, setIsLoggedIn, setTypedMessage, setMessageReceived } = userSlice.actions;
+export const { setUserName, clearUserName, setIsLoggedIn, setTypedMessage, setMessages } = userSlice.actions;
 export default userSlice.reducer;

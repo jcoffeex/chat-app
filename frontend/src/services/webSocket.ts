@@ -1,6 +1,6 @@
 import { io, Socket } from "socket.io-client";
 import { store } from "@redux/store";
-import { setMessageReceived } from "@redux/slices/userSlice";
+import { setMessages } from "@redux/slices/userSlice";
 let socket: Socket;
 
 const webSocket = (username: string): Promise<Socket> => {
@@ -20,9 +20,12 @@ const webSocket = (username: string): Promise<Socket> => {
     });
 
     socket.on('receiveMessage', (data) => {
-      store.dispatch(setMessageReceived(data.message));
+      const message = {
+        user: data.username,
+        message: data.message
+      }
+      store.dispatch(setMessages([message]));
       console.log(`${data.username}: ${data.message}`);
-      
     });
   });
 };

@@ -10,12 +10,11 @@ const Card = styled.View`
   max-width: 200px;
 
   border-radius: 14px;
+
 `;
 
 const TextUser = styled(TextBase)`
   color: orange;
-
-  margin-bottom: 8px;
   
 `;
 
