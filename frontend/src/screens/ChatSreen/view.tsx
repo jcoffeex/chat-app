@@ -4,18 +4,16 @@ import * as C from "./styles";
 import { ChatInput } from "@components/Input";
 import { ButtonChat } from "@components/Button";
 import Message from "@components/Message";
-import { useSelector } from "react-redux";
-import { RootState } from "@redux/store";
+import useStore from "@hooks/useStore";
 export default function ChatScreen() {
-  const user = useSelector((state: RootState) => state.user.username);
-  const message = useSelector((state: RootState) => state.user.messageReceived);
+  const { username, messageReceived } = useStore();
   return (
     <C.Container>
       <StatusBar style="light" />
       <C.Content messageOrientation="recipient">
-        {user && message && (
+        {username && messageReceived && (
           <C.MessagesContainer>
-            <Message user={user} message={message} />
+            <Message user={username} message={messageReceived} />
           </C.MessagesContainer>
         )}
 

@@ -11,7 +11,8 @@
       "@typs/*": ["typs/*"],
       "@redux/*": ["redux/*"],
       "@utils/*": ["utils/*"],
-      "@services/*": ["services/*"]
+      "@services/*": ["services/*"],
+      "@hooks/*": ["hooks/*"]
     }
   }
 }
