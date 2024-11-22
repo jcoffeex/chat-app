@@ -10,7 +10,8 @@
       "@navigations/*": ["navigations/*"],
       "@typs/*": ["typs/*"],
       "@redux/*": ["redux/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@services/*": ["services/*"]
     }
   }
 }
