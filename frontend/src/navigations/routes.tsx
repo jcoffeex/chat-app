@@ -3,13 +3,16 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import LoginContainer from "@screens/LoginScreen";
 import ChatContainer from "@screens/ChatSreen";
+import { useSelector } from "react-redux";
+import { RootState } from "@redux/store";
 
 const Stack = createStackNavigator();
 
 function Routes() {
+  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
   return (
     <NavigationContainer>
-      {false ? <PrivateRoutes /> : <PublicRoutes />}
+      {isLoggedIn ? <PrivateRoutes /> : <PublicRoutes />}
     </NavigationContainer>
   );
 }

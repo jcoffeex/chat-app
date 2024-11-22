@@ -29,8 +29,9 @@ import {
 
     @SubscribeMessage('sendMessage')
     handleMessage(@MessageBody() message: any, @ConnectedSocket() client: Socket) {
+      const username = client.handshake.query.username;
       console.log('Mensagem recebida:', message);
-      this.server.emit('receiveMessage', message);
+      this.server.emit('receiveMessage', {username, message});
     }
   }
   
