@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 function Routes() {
   return (
     <NavigationContainer>
-      {true ? <PrivateRoutes /> : <PublicRoutes />}
+      {false ? <PrivateRoutes /> : <PublicRoutes />}
     </NavigationContainer>
   );
 }
