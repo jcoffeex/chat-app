@@ -4,8 +4,10 @@ Um simples chat em tempo real.
 
 ## Pré-visualização do App
 
-<img src='./assets/images/loginScreen.png' alt='Tela de login' height='300px'>
-<img src='./assets/images/chatScreen.png' alt='Tela de chat' height='300px'>
+<div align="center">
+  <img src="./assets/images/loginScreen.png" alt="Tela de Login" height="300px" style="margin-right: 10px;">
+  <img src="./assets/images/chatScreen.png" alt="Tela de Chat" height="300px">
+</div>
 
 ## Rodar o projeto:
 
