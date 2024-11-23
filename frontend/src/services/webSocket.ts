@@ -1,6 +1,6 @@
 import { io, Socket } from "socket.io-client";
 import { store } from "@redux/store";
-import { setMessages, setTypedMessage} from "@redux/slices/userSlice";
+import { setId, setMessages, setTypedMessage, setIsLoggedIn} from "@redux/slices/userSlice";
 import { serverIp } from "@utils/functions/getServerIp";
 import { showMessage } from "react-native-flash-message";
 import colors from "@utils/constants/colors";
@@ -15,15 +15,24 @@ const webSocket = (username: string): Promise<Socket> => {
 
     socket.on('connect', () => {
       console.log('Conectado ao WebSocket');
-      resolve(socket);  
+      store.dispatch(setIsLoggedIn(true));  
+      resolve(socket);
+    });
+
+    socket.on('error', (error) => {
+      console.error(error);
+      store.dispatch(setIsLoggedIn(false));
+      reject(error); 
     });
 
     socket.on('connect_error', (error) => {
       console.error('Erro ao conectar ao WebSocket:', error);
+      store.dispatch(setIsLoggedIn(false));
       reject(error); 
     });
 
     socket.on('newUser', (data) => {
+      store.dispatch(setId(data.id));
       showMessage({
         message: "Novo usuário conectado",
         description: `${data.username} entrou na sala.`,
@@ -43,6 +52,7 @@ const webSocket = (username: string): Promise<Socket> => {
     socket.on('receiveMessage', (data) => {
       const message = {
         user: data.username,
+        id: store.getState().user.id,
         message: data.message
       }
       store.dispatch(setMessages([message]));

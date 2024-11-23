@@ -5,8 +5,8 @@ const useStore = () => {
     const typedMessage = useSelector((state: RootState) => state.user.typedMessage);
     const messages = useSelector((state: RootState) => state.user.messages);
     const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
-
-    return {username, typedMessage, messages, isLoggedIn};
+    const id = useSelector((state: RootState) => state.user.id);
+    return {username, typedMessage, messages, isLoggedIn, id};
 };
 
 export default useStore;
