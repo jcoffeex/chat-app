@@ -19,11 +19,13 @@ import {
     
     handleConnection(client: Socket) {
       const username = client.handshake.query.username;
+      this.server.emit('newUser', {username})
       console.log('Usuário conectado:', username);
     };
   
     handleDisconnect(client: Socket) {
       const username = client.handshake.query.username;
+      this.server.emit('userLeft', {username})
       console.log('Usuário desconectado', username);
     }
 

@@ -22,11 +22,13 @@ export function LoginInput() {
 }
 
 export function ChatInput() {
+  const { typedMessage } = useStore();
   const dispatch = useDispatch();
   return (
     <C.ChatInput
       placeholder="Mensagem"
       placeholderTextColor={colors["white-00"]}
+      value={typedMessage}
       onChangeText={(text) => dispatch(setTypedMessage(text))}
     />
   );

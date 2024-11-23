@@ -5,6 +5,7 @@ import { ChatInput } from "@components/Input";
 import { ButtonChat } from "@components/Button";
 import Message from "@components/Message";
 import useStore from "@hooks/useStore";
+import FlashMessage from "react-native-flash-message";
 export default function ChatScreen() {
   const { messages, username } = useStore();
 
@@ -12,6 +13,13 @@ export default function ChatScreen() {
   return (
     <C.Container>
       <StatusBar style="light" />
+      <FlashMessage
+        position="center"
+        style={{
+          width: "80%",
+          borderRadius: 8,
+        }}
+      />
       <C.Content>
         {messages.map((item, index) => (
           <C.MessagesContainer

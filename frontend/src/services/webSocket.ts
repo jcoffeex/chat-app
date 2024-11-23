@@ -1,7 +1,9 @@
 import { io, Socket } from "socket.io-client";
 import { store } from "@redux/store";
-import { setMessages } from "@redux/slices/userSlice";
+import { setMessages, setTypedMessage} from "@redux/slices/userSlice";
 import { serverIp } from "@utils/functions/getServerIp";
+import { showMessage } from "react-native-flash-message";
+import colors from "@utils/constants/colors";
 let socket: Socket;
 
 const port = 3000;
@@ -21,6 +23,23 @@ const webSocket = (username: string): Promise<Socket> => {
       reject(error); 
     });
 
+    socket.on('newUser', (data) => {
+      showMessage({
+        message: "Novo usuário conectado",
+        description: `${data.username} entrou na sala.`,
+        duration: 10000,
+        backgroundColor: colors["orange-00"], 
+      });
+    })
+
+    socket.on('userLeft', (data) => {
+      showMessage({
+        message: "Usuário desconectado.",
+        description: `${data.username} saiu da sala.`,
+        duration: 10000,
+      });
+    })
+
     socket.on('receiveMessage', (data) => {
       const message = {
         user: data.username,
@@ -33,8 +52,10 @@ const webSocket = (username: string): Promise<Socket> => {
 };
 
 export const sendMessage = (message: string) => {
-  if (socket && socket.connected) {
+  const typedMessage = store.getState().user.typedMessage;
+  if (socket && socket.connected && typedMessage) {
     socket.emit('sendMessage', message);
+    store.dispatch(setTypedMessage(''))
   } else {
     console.log('Erro: WebSocket não está conectado.');
   }
