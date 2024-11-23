@@ -1,11 +1,13 @@
 import { io, Socket } from "socket.io-client";
 import { store } from "@redux/store";
 import { setMessages } from "@redux/slices/userSlice";
+import { serverIp } from "@utils/functions/getServerIp";
 let socket: Socket;
 
+const port = 3000;
 const webSocket = (username: string): Promise<Socket> => {
   return new Promise((resolve, reject) => {
-    socket = io('http://10.0.2.2:3000', {
+    socket = io(`http://${serverIp}:${port}`, {
       query: { username },
     });
 
