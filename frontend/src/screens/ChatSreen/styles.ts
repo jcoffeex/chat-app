@@ -14,18 +14,18 @@ const Content = styled.View`
 
     flex: 1;
 
-    justify-content: center;
+   justify-content: flex-end;
 `
 
 const MessagesContainer = styled.View<SCMessageProps>`
     align-items: ${props => props.messageOrientation === 'sender' ? 'flex-end' : 'flex-start'}; 
-
+    
+    margin-bottom: 12px;
 `
 
 const inputContainer = styled.View`
-    position: absolute;
+    margin-top: 30px;
     
-    bottom: 8px;
     width: 100%;
 
     flex-direction: row;
