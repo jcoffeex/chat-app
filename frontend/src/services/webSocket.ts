@@ -61,10 +61,6 @@ const webSocket = (username: string): Promise<Socket> => {
   });
 };
 
-export const validateUser = () => {
-  
-}
-
 export const sendMessage = (message: string) => {
   const typedMessage = store.getState().user.typedMessage;
   if (socket && socket.connected && typedMessage) {
