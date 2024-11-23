@@ -2,11 +2,13 @@ import { createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 interface Message {
     user: string;
+    id: string,
     message: string;
 }
 
 interface userState {
     username: string;
+    id: string;
     typedMessage: string;
     messages: Message[];
     isLoggedIn: boolean;
@@ -14,6 +16,7 @@ interface userState {
 
 const initialState: userState = {
     username: '',
+    id: '',
     typedMessage: '', 
     messages: [],
     isLoggedIn: false,
@@ -27,6 +30,10 @@ export const userSlice = createSlice({
             state.username = action.payload; 
         },
         
+        setId: (state, action: PayloadAction<string>) => {
+            state.id= action.payload; 
+        },
+
         clearUserName: (state) => {
             state.username = ''; 
         },
@@ -45,5 +52,5 @@ export const userSlice = createSlice({
     }, 
 });
 
-export const { setUserName, clearUserName, setIsLoggedIn, setTypedMessage, setMessages } = userSlice.actions;
+export const { setUserName, setId, clearUserName, setIsLoggedIn, setTypedMessage, setMessages } = userSlice.actions;
 export default userSlice.reducer;

@@ -17,8 +17,19 @@ import {
   export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer() server: Server;
     
+    private users = new Map<string, string>()
+
     handleConnection(client: Socket) {
-      const username = client.handshake.query.username;
+      
+      const username = client.handshake.query.username as string;
+      const usersList = Array.from(this.users.values())
+      if(usersList.includes(username)){
+        client.emit('error', 'Usuáro já existe!');
+        client.disconnect();
+        console.log('Conexão rejeitada para', username);
+        return;
+      }
+      this.users.set(client.id, username);
       this.server.emit('newUser', {username})
       console.log('Usuário conectado:', username);
     };

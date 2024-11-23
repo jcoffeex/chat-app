@@ -7,7 +7,6 @@ const handleLogin = async (username: string) => {
       if (username.trim()) {
         console.log('Conectando com o username:', username);
         await webSocket(username)
-        store.dispatch(setIsLoggedIn(true));
         console.log('Conexão WebSocket estabelecida com sucesso.');
       } else {
         console.log('Por favor, insira um nome de usuário válido.');
