@@ -13,6 +13,9 @@ Um simples chat em tempo real.
 
 ### Frontend:
 
+1. Configuração:
+   Dentro da pasta `server`, renomeie o arquivo `.env.example` para `.env` e configure as variáveis de ambiente conforme necessário.
+
 ```
 yarn
 yarn start
