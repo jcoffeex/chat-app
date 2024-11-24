@@ -1,9 +1,11 @@
 import { io, Socket } from "socket.io-client";
 import { store } from "@redux/store";
-import { setId, setMessages, setTypedMessage, setIsLoggedIn} from "@redux/slices/userSlice";
+import { setMessages, setTypedMessage, setIsLoggedIn} from "@redux/slices/userSlice";
 import { serverIp } from "@utils/functions/getServerIp";
 import { showMessage } from "react-native-flash-message";
 import colors from "@utils/constants/colors";
+import { encryptMessage, decryptMessage } from "@utils/functions/crypto";
+
 let socket: Socket;
 
 const port = 3000;
@@ -32,7 +34,7 @@ const webSocket = (username: string): Promise<Socket> => {
     });
 
     socket.on('newUser', (data) => {
-      store.dispatch(setId(data.id));
+
       showMessage({
         message: "Novo usuário conectado",
         description: `${data.username} entrou na sala.`,
@@ -50,10 +52,10 @@ const webSocket = (username: string): Promise<Socket> => {
     })
 
     socket.on('receiveMessage', (data) => {
+      const decryptedMessage = decryptMessage(data.message);
       const message = {
         user: data.username,
-        id: store.getState().user.id,
-        message: data.message
+        message: decryptedMessage
       }
       store.dispatch(setMessages([message]));
       console.log(`${data.username}: ${data.message}`);
@@ -64,7 +66,8 @@ const webSocket = (username: string): Promise<Socket> => {
 export const sendMessage = (message: string) => {
   const typedMessage = store.getState().user.typedMessage;
   if (socket && socket.connected && typedMessage) {
-    socket.emit('sendMessage', message);
+    const encryptedMessage = encryptMessage(message);
+    socket.emit('sendMessage', encryptedMessage);
     store.dispatch(setTypedMessage(''))
   } else {
     console.log('Erro: WebSocket não está conectado.');
