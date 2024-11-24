@@ -12,10 +12,7 @@ Um simples chat em tempo real.
 ## Rodar o projeto:
 
 ### Frontend:
-
-1. Configuração:
-   
-   Renomeie o arquivo `.env.example` para `.env` e configure as variáveis de ambiente.
+- Renomeie o arquivo `.env.example` para `.env` e configure as variáveis de ambiente.
 
 ```
 yarn
