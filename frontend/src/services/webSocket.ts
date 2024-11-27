@@ -34,13 +34,14 @@ const webSocket = (username: string): Promise<Socket> => {
     });
 
     socket.on('newUser', (data) => {
-
+     if(data.username){
       showMessage({
         message: "Novo usuário conectado",
         description: `${data.username} entrou na sala.`,
         duration: 10000,
         backgroundColor: colors["orange-00"], 
       });
+     }
     })
 
     socket.on('userLeft', (data) => {
