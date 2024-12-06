@@ -1,6 +1,7 @@
 # App chat
 
-Um simples chat em tempo real.
+Este projeto foi desenvolvido com o objetivo de compreender a comunicação em tempo real.
+Para isso, utilizei React Native, com o objetivo de aprimorar meus conhecimentos em desenvolvimento mobile híbrido. O aplicativo foi testado apenas em dispositivos Android.
 
 ## Pré-visualização do App
 
